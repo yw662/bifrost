@@ -7,7 +7,13 @@
 ### via Web socket
 * Use `/tunnels/<protocol>/<host>/<port>` to establish a new tunnel.
     * exp, `/tunnels/TCP/example.com/443`.
-    * Just all data will be passed as is.
+    * All data will be passed as is.
+
+    ```js
+    const ws = new WebSocket('wss://<bifrost_server>/tunnels/TCP/example.com/80');
+    ws.onmessage = event=>event.data.text().then(t=>console.log(t));
+    ws.send('GET / HTTP/1.1\r\nHost: example.com\r\n\r\n');
+    ```
 
 ### via HTTP
 * Although `CONNECT` is the best method for tunnels, it is not supported by XHR and fetch.
@@ -37,6 +43,9 @@ Content-Type: application/json
         * Again, pass the token through query string.
     * Client side can write to the tunnel through `POST` request.
     * Client side can close the tunnel through `DELETE` request.
+
+    ```js
+    ```
 
 ## Use cases
 * As a frontend developer, you might need a backend just to relay requests to somewhere else, you can now use some public nodes instead.
