@@ -162,6 +162,8 @@ class TunnelStorage {
         return r;
     }
     pending(key) { return !this[key] || this[key].pending }
+    empty(key) { return !this[key] || this[key].buffer.length === 0 }
+    closed(key) { return !this[key] || this[key].closed }
     on(key, ...args) { this[key] && this[key].tunnel.on(...args) }
     once(key, ...args) { this[key] && this[key].tunnel.once(...args) }
     off(key, ...args) { this[key] && this[key].tunnel.off(...args) }
