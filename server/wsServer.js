@@ -24,7 +24,7 @@ module.exports = options => {
             }
         } catch (e) {
             socket.close();
-            throw e;
+            // throw e;
         }
     });
     return server;
