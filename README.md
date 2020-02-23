@@ -5,8 +5,9 @@
 ## How it works
 
 ### via Web socket
-* Use `/<protocol>/<host>/<port>` to establish a new tunnel.
-    * exp, `/TCP/example.com/443`.
+* Use `/tunnels/<protocol>/<host>/<port>` to establish a new tunnel.
+    * exp, `/tunnels/TCP/example.com/443`.
+    * Just all data will be passed as is.
 
 ### via HTTP
 * Although `CONNECT` is the best method for tunnels, it is not supported by XHR and fetch.
@@ -58,7 +59,7 @@ Content-Type: application/json
         * `chunked_transfer_encoding off;`
         * `proxy_buffering off;`
 
-## Public node list
+<!-- ## Public node list
 * Nodes run by us 
     * https://bifrost.yw662.dynu.net/, with HTTP/2 support
-    * wss://bifrost.yw662.dynu.net/
+    * wss://bifrost.yw662.dynu.net/ -->

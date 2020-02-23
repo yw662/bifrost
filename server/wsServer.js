@@ -6,7 +6,10 @@ module.exports = options => {
     const server = new ws.Server(options);
     server.on('connection', (socket, req) => {
         try {
-            const [, protocol, host, port] = req.url.split('/');
+            const [, shouldBeTunnel, protocol, host, port] = req.url.split('/');
+            if (shouldBeTunnel !== 'tunnels') {
+                return socket.close();
+            }
             const tun = new Tunnel({ protocol, host, port });
             try {
                 socket.on('close', () => tun.close());
