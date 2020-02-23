@@ -45,6 +45,27 @@ Content-Type: application/json
     * Client side can close the tunnel through `DELETE` request.
 
     ```js
+        tunReq = new XMLHttpRequest();
+    tunReq.open('POST', 'https://bifrost.yw662.dynu.net/tunnels');
+    tunReq.onreadystatechange = function () {
+        if (tunReq.readyState !== 4) return;
+        tun = JSON.parse(tunReq.response);
+        console.log(tun);
+        ev = new EventSource('https://bifrost.yw662.dynu.net' + tun.location + '/events?token=' + tun.token);
+        ev.onmessage = function(e) {
+            recvReq = new XMLHttpRequest();
+            recvReq.open('GET', 'https://bifrost.yw662.dynu.net' + tun.location + '?token=' + tun.token);
+            recvReq.onreadystatechange = function() {
+                if(recvReq.readyState !== 4) return;
+                console.log(recvReq.response);
+            }
+            recvReq.send();
+        }
+        sendReq = new XMLHttpRequest();
+        sendReq.open('POST', 'https://bifrost.yw662.dynu.net' + tun.location + '?token=' + tun.token);
+        sendReq.send('GET / HTTP/1.1\r\nHost: example.com\r\n\r\n');
+    }
+    tunReq.send(JSON.stringify({ protocol: "TCP", host: "example.com", port: 80 }));
     ```
 
 ## Use cases
