@@ -41,4 +41,3 @@ if (config.setuid) {
     }
     process.setuid(config.setuid);
 }
-console.log(process.getuid());
