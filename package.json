@@ -1,0 +1,27 @@
+{
+  "name": "bifrost",
+  "version": "1.0.0",
+  "description": "A bridge bringing web apps raw socket",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yw662/bifrost.git"
+  },
+  "keywords": [
+    "bifrost",
+    "socket"
+  ],
+  "author": "yw662",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yw662/bifrost/issues"
+  },
+  "homepage": "https://github.com/yw662/bifrost#readme",
+  "dependencies": {
+    "ws": "^7.2.1"
+  }
+}
