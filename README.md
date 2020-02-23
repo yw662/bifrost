@@ -89,7 +89,9 @@ Content-Type: application/json
         * `chunked_transfer_encoding off;`
         * `proxy_buffering off;`
 
-<!-- ## Public node list
+## Public node list
 * Nodes run by us 
     * https://bifrost.yw662.dynu.net/, with HTTP/2 support
-    * wss://bifrost.yw662.dynu.net/ -->
+    * wss://bifrost.yw662.dynu.net/
+* Node list maintained by us
+    * https://bifrost.yw662.dynu.net/nodes.lst
