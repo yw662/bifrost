@@ -63,13 +63,17 @@ const tunnelRequest = (key, isEvent, req, res) => {
                 'Cache-Control': 'no-cache',
                 'X-Accel-Buffering': 'no'
             });
-            const onData = () => res.write('event: data\n\n');
-            const onClose = () => res.end('event: close\n\n');
+            if (!tunnels.empty(key)) res.write('data: data\n\n');
+            if (tunnels.closed(key)) return res.end('event: close\ndata: close\n\n');
+            const onData = () => res.write('data: data\n\n');
+            const onClose = () => res.end('event: close\ndata: close\n\n');
             tunnels.on(key, 'data', onData);
             tunnels.on(key, 'close', onClose);
+            const ping = setInterval(() => res.write('event: ping\ndata: ping\n\n'), 1000);
             res.on('close', () => {
                 tunnels.removeListener(key, 'data', onData);
                 tunnels.removeListener(key, 'close', onClose);
+                clearInterval(ping);
             });
         } else {
             res.writeHead(200, {
