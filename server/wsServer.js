@@ -1,3 +1,4 @@
+
 'use strict';
 const ws = require('ws');
 const { Tunnel } = require('./tunnels.js');
@@ -14,6 +15,7 @@ module.exports = options => {
             try {
                 socket.on('close', () => tun.close());
                 tun.on('close', () => socket.close());
+                tun.on('error', () => tun.close());
                 socket.on('message', data => tun.write(data));
                 tun.on('data', data => socket.send(data));
             } catch (e) {

@@ -132,6 +132,7 @@ class TunnelStorage {
         tunnel.once('connect', () => {
             this[key].pending = false;
             tunnel.removeListener('error', onerror);
+            tunnel.on('error', () => { this.delete(key) });
             if (resolve) resolve(key);
             else connected = true;
         });
